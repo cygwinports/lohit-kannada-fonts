@@ -1,8 +1,8 @@
 inherit font
 
-NAME="font-lohit-kannada-ttf"
+NAME="lohit-kannada-fonts"
 VERSION=2.5.3
-RELEASE=1
+RELEASE=2
 CATEGORY="X11"
 SUMMARY="Lohit Kannada font"
 DESCRIPTION="Lohit ('Red' in Sanskrit) is a font family which supports various
@@ -10,6 +10,11 @@ Indic scripts."
 HOMEPAGE="https://fedorahosted.org/lohit/"
 SRC_URI="https://fedorahosted.org/releases/l/o/lohit/lohit-kannada-${VERSION}.tar.gz"
 SRC_DIR="lohit-kannada-${VERSION}"
+PATCH_URI="http://pkgs.fedoraproject.org/cgit/lohit-kannada-fonts.git/plain/lohit-kannada-fonts-script-tag.patch"
+
+ARCH=noarch
+
+OBSOLETES="font-lohit-kannada-ttf"
 
 src_compile() {
 	lndirs
@@ -19,7 +24,7 @@ src_compile() {
 
 src_install() {
 	cd ${B}
-	fontinto TTF
+	fontinto ${NAME%-fonts}
 	dofont *.ttf
 
 	dofontconf *.conf
